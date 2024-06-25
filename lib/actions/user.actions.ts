@@ -54,12 +54,15 @@ export async function getLoggedInUser() {
     }
   }
 
-export const logOut = async () =>{
+export const logoutAccount = async () =>{
   try {
     const {account} = await createSessionClient()
     cookies().delete('appwrite-session')
+    await account.deleteSession('current')
   } catch (error) {
-    console.error('Error: ',error)
+    return null
   }
 }
+
+
   
