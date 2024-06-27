@@ -25,10 +25,10 @@ const Footer = ({user,type='desktop'}:FooterProps) => {
         </div>
         <div className={type === 'mobile'?'footer-email_mobile':'footer-email'}>
           <h1 className='text-14 truncate font-semibold text-gray-700 font-semibold'>
-            {user.name}
+            {user?.name}
           </h1>
           <p className='text-14 truncate font-normal text-gray-600'>
-          {user.email}
+          {user?.email}
           </p>
         </div>
         <div className='footer_image' onClick={handleLogOut}>
