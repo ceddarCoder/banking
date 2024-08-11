@@ -12,6 +12,7 @@ const {
 export const createTransaction = async (transaction: CreateTransactionProps) => {
   try {
     const { database } = await createAdminClient();
+    console.log("createTransaction request:", transaction);
 
     const newTransaction = await database.createDocument(
       DATABASE_ID!,
@@ -23,6 +24,8 @@ export const createTransaction = async (transaction: CreateTransactionProps) => 
         ...transaction
       }
     )
+
+    console.log("createTransaction response:", newTransaction);
 
     return parseStringify(newTransaction);
   } catch (error) {

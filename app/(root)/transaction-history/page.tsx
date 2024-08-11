@@ -1,4 +1,5 @@
 import HeaderBox from '@/components/HeaderBox'
+import { Pagination } from '@/components/Pagination';
 import TransactionsTable from '@/components/TransactionsTable';
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.actions';
@@ -25,6 +26,14 @@ const TransactionHistory = async ({searchParams:{id,page}}:SearchParamProps) => 
       // Handle the case where there are no accounts
       return <div>No accounts found</div>;
   }
+
+  const rowsPerPage = 10;
+  const totalPages = Math.ceil(account?.transactions.length / rowsPerPage);
+
+  const indexOfLastTransaction = currentPage * rowsPerPage;
+  const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
+
+  const currentTransactions = account?.transactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
 
 
 
@@ -67,8 +76,16 @@ const TransactionHistory = async ({searchParams:{id,page}}:SearchParamProps) => 
 
         <section className='flex w-full flex-col gap-6'>
           <TransactionsTable
-            transactions={account?.transactions}
+            transactions={currentTransactions}
           />
+          {totalPages>1 && (
+            <div className='my-4 w-full'>
+              <Pagination 
+                totalPages={totalPages}
+                page={currentPage}
+              />
+            </div>
+          )}
         </section>
       </div>
 
