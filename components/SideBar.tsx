@@ -11,7 +11,7 @@ import PlaidLink from './PlaidLink';
 const SideBar = ({user}:SideBarProps) => {
     const pathname = usePathname();
   return (
-    <section className='sidebar w-min-[400px] overflow-auto'>
+    <section className='sidebar w-max-[300px] overflow-auto'>
         <nav className='flex flex-col gap-4'>
             <Link href = "/" className = "mb-12 cursor-pointer flex items-center gap-2">
                 <Image 

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import BankCard from './BankCard'
 import { countTransactionCategories } from '@/lib/utils'
 import Category from './Category'
+import PlaidLink from './PlaidLink'
 
 const Rightsidebar = ({user, transactions, banks}:RightSidebarProps) => {
 
@@ -12,38 +13,45 @@ const Rightsidebar = ({user, transactions, banks}:RightSidebarProps) => {
 
   return (
     <aside className='right-sidebar'>
-        <section className='flex flex-col pb-8'>
-            <div className='profile-banner'/>
-                <div className='profile'>
-                    <div className='profile-img'>
-                        <span className='text-5xl font-bold text-blue-500'>
-                            {user?.firstName[0]}
-                        </span>
-                    </div>
-                    <div className='profile-details'>
-                        <h1 className='profile-name'>
-                            {user.firstName} {user.lastName}
-                        </h1>
-                        <p className='profile-email'>
-                            {user?.email}
-                        </p>
-                    </div>
-                </div>
-        </section>
-        <section className='banks'>
-            <div className='flex w-full justify-between '>
+        <section >
+    <div className='profile-banner'>
+        <div className='profile'>
+            <div className='profile-img'>
+                <span className='text-xl font-bold text-blue-500'>
+                    {user?.firstName[0]}
+                </span>
+            </div>
+            <div className='profile-details'>
+                <h1 className='profile-name text-white text-sm font-semibold'>
+                    {user.firstName} {user.lastName}
+                </h1>
+                <p className='profile-email text-xs text-gray-200'>
+                    {user?.email}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+        <section className='banks pt-2'>
+            <div className='flex items-center w-full justify-between mb-1'>
                 <h2 className='header-2'>
                     My Banks
                 </h2> 
-                    <Link href='/' className='flex gap-2'>
+                    {/* <Link href='/' className='flex gap-2'>
                         <Image src = './icons/plus.svg' width={20} height={20} alt='plus'/>
                         <h2 className='text-14 font-semibold text-gray-600'>
                             Add Bank
                         </h2>
-                    </Link>  
+                    </Link>   */}
+                <PlaidLink user={user} variant="ghost"/>
+
+                
             </div>
             {banks?.length>0 && (
-                <div className='relative flex flex-1 flex-col items-center justify-center gap-5'>
+                <div className='relative flex flex-1 flex-col items-center justify-start gap-2'>
                     <div className='relative z-10'>
                         <BankCard
                             key={banks[0].$id}
@@ -65,8 +73,8 @@ const Rightsidebar = ({user, transactions, banks}:RightSidebarProps) => {
                 </div>
             )
             }
-            <div className='mt-10 flex flex-1 flex-col gap-6'>
-                <h2 className='header-2'>
+            <div className='mt-10 flex flex-1 flex-col gap-[1.25rem]'>
+                <h2 className='header-2 pt-[2.5rem]'>
                     Top Categories
                 </h2>
                 <div className='space-y-5'>
