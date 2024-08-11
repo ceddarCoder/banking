@@ -4,14 +4,14 @@ import Image from 'next/image'
 import React from 'react'
 import { sidebarLinks } from '@/constants'
 import { cn } from '@/lib/utils'
-import { PathnameContext } from 'next/dist/shared/lib/hooks-client-context.shared-runtime'
 import { usePathname } from 'next/navigation'
 import Footer from './Footer';
+import PlaidLink from './PlaidLink';
 
 const SideBar = ({user}:SideBarProps) => {
     const pathname = usePathname();
   return (
-    <section className='sidebar'>
+    <section className='sidebar w-min-[400px] overflow-auto'>
         <nav className='flex flex-col gap-4'>
             <Link href = "/" className = "mb-12 cursor-pointer flex items-center gap-2">
                 <Image 
@@ -49,7 +49,7 @@ const SideBar = ({user}:SideBarProps) => {
                 )
                 })
             }
-        USER 
+        <PlaidLink user = {user}/>
         </nav>
         <Footer 
             user = {user}

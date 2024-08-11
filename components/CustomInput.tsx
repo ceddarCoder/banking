@@ -12,9 +12,10 @@ interface CustomInputProps {
   name: FieldPath<z.infer<typeof formSchema>>
   label: string
   placeholder: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CustomInput = ({control, name, label, placeholder}:CustomInputProps) => {
+const CustomInput = ({control, name, label, placeholder,onChange}:CustomInputProps) => {
   return (
     <FormField
         control={control}
@@ -24,18 +25,20 @@ const CustomInput = ({control, name, label, placeholder}:CustomInputProps) => {
             <FormLabel className='form-label'>
                 {label}
             </FormLabel>
-            <div className='flex w-full flex-col'>
+            <div className='flex w-full flex-col space-y-1'>
                 <FormControl>
                     <Input 
                     placeholder={placeholder}
                     className='input-class'
                     type={name === 'password'? 'password' : 'text'}
                     {...field}
+                    onChange={(e) => {
+                      field.onChange(e); // Call react-hook-form's onChange
+                      if (onChange) onChange(e); // Call the custom onChange handler if provided
+                    }}
                     />
                 </FormControl>
-                <FormMessage className='form-message mt-2'
-                
-                />
+                <FormMessage className='form-message' style={{ marginTop: '0.25rem' }} /> {/* Inline style for fine control */}
             </div>
           </div>
         )}  
